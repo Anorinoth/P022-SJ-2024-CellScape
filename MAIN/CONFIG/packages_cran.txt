@@ -1,0 +1,15 @@
+# CRAN packages required for P022-SJ-2024-CellScape
+# One package per line, blank lines and lines starting with # are ignored
+
+dplyr
+ggplot2
+MLmetrics
+survival
+tibble
+ggsurvfit
+ggpubr
+remotes
+futile.options
+lambda.r
+# qs is archived from CRAN — install via: renv::install("qs@0.27.3")
+bigmemory

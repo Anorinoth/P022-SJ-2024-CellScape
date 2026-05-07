@@ -1,0 +1,11 @@
+{
+    "python.analysis.typeCheckingMode": "basic",
+    // R Terminal Settings (for large image analysis)
+    "r.rterm.option": [
+        "--max-ppsize=500000"
+    ],
+    "r.rterm.linux": "/opt/R/4.4.3/bin/R",
+    "terminal.integrated.env.linux": {
+        "R_MAX_VSIZE": "256Gb"
+    }
+}

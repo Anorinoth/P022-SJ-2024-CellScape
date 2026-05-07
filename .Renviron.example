@@ -1,0 +1,56 @@
+# ==============================================================================
+# R Environment Configuration for P022-SJ-2024-CellScape
+# Author: Dr. Michael Zaiken
+# ==============================================================================
+# Copy this file to .Renviron and update the paths for your system.
+# .Renviron is loaded automatically when R starts in this project directory.
+
+# --- Project Directory Paths (REQUIRED) ---
+# These are read by setup_project.R to configure the analysis pipeline.
+
+P022_CODE_DIR=/path/to/P022-SJ-2024-CellScape/Code
+P022_DATA_DIR=/path/to/P022-SJ-2024-CellScape/Data
+P022_OUTPUTS_DIR=/path/to/P022-SJ-2024-CellScape/Outputs
+P022_REPORTS_DIR=/path/to/P022-SJ-2024-CellScape/Reports
+
+# Optional: manuscript directory
+# P022_PAPER_DIR=/path/to/P022-SJ-2024-CellScape/Paper
+
+# Optional: temp directory for large intermediate files (defaults to tempdir())
+# P022_TEMP_DIR=/path/to/temp
+
+# --- Temporary Directory ---
+# Point TMPDIR to a drive with sufficient free space for large image processing.
+# TMPDIR=/path/to/temp
+
+# --- renv Cache Location ---
+# renv cache can grow to several GB. Set to a drive with space.
+# RENV_PATHS_CACHE=/path/to/renv/cache
+# RENV_PATHS_LIBRARY_ROOT=/path/to/renv/library
+
+# --- HDF5 Settings ---
+# Disable file locking if on WSL2 or network drives
+HDF5_USE_FILE_LOCKING=FALSE
+
+# --- R Memory Settings ---
+# Increase for large image analysis. Adjust based on your system RAM.
+R_MAX_VSIZE=256Gb
+R_MAX_NUM_DLLS=500
+
+# --- Parallel Processing ---
+# Default number of CPU cores for parallel operations
+MC_CORES=8
+
+# --- BiocParallel ---
+BIOCPARALLEL_VERBOSE=0
+
+# --- Download Settings ---
+R_DEFAULT_INTERNET_TIMEOUT=600
+
+# --- Package Repository ---
+R_CRAN_MIRROR=https://cloud.r-project.org
+
+# --- Java Configuration (for RBioFormats) ---
+JAVA_HOME=/usr/lib/jvm/default-java
+LD_LIBRARY_PATH=${JAVA_HOME}/lib/server:${LD_LIBRARY_PATH}
+R_JAVA_LD_LIBRARY_PATH=${JAVA_HOME}/lib/server

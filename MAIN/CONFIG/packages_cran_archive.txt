@@ -1,0 +1,5 @@
+# Archived CRAN packages required for P022-SJ-2024-CellScape
+# Format: package@version (one per line)
+# These packages have been removed from CRAN and are installed from the archive
+
+qs@0.27.3

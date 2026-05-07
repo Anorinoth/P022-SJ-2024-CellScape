@@ -1,0 +1,7 @@
+# GitHub packages required for P022-SJ-2024-CellScape
+# Format: user/repo or user/repo@branch
+# One package per line, blank lines and lines starting with # are ignored
+
+# ggtree from GitHub (development version to avoid dependency issues)
+YuLab-SMU/ggtree
+
