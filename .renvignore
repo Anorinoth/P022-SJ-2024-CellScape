@@ -1,0 +1,75 @@
+# renv ignore file for SJ_04.2 project
+# This tells renv which files to skip when discovering dependencies
+
+# Ignore data directories
+data/
+scripts/
+bftools/
+QuPath/
+config/
+logs/
+temp_channels/
+temp_channels_parallel/
+tests/
+bioio_env/
+__pycache__/
+
+# Ignore image files
+*.tif
+*.tiff
+*.png
+*.jpg
+*.jpeg
+*.svg
+*.pdf
+
+# Ignore output files
+*.html
+*.htm
+*.csv
+*.xlsx
+*.xls
+
+# Ignore temporary files
+*.tmp
+*.temp
+*~
+
+# Ignore hidden directories
+.git/
+.vscode/
+.idea/
+
+# Ignore large data files
+*.h5
+*.hdf5
+*.zip
+*.tar
+*.gz
+
+# Ignore documentation
+README*.md
+SETUP_GUIDE.md
+
+# Ignore Python files
+*.py
+*.pyc
+
+# Ignore Java files
+*.java
+*.class
+
+# Ignore Groovy scripts
+scripts/*.groovy
+
+# Ignore XML and log files
+*.xml
+*.txt
+*.properties
+
+# Ignore lock directories
+**/00LOCK-*
+
+# Only scan R code in MAIN/
+# Specifically: MAIN/SpicyFlow.Rmd and MAIN/fix_packages.R
+

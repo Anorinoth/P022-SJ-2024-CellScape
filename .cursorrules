@@ -1,0 +1,65 @@
+# Cursor AI Rules for SJ_04.2 Project
+
+## Project Coding Standards
+
+**READ AND FOLLOW: MAIN/CONFIG/CODING_STANDARDS.md**
+
+This project follows a strict **Fail-Fast** approach to error handling.
+
+## Critical Rules
+
+### ❌ NEVER USE:
+- `tryCatch()`
+- `try()`
+- `suppressWarnings()`
+- `suppressMessages()`
+
+### ✅ ALWAYS:
+- Let operations fail immediately with full error messages
+- Display all warnings and messages
+- Fix root causes instead of masking errors
+- Provide clear, actionable error messages
+
+## When Writing Code
+
+1. **Error Handling**: Do NOT wrap operations in tryCatch. Let them fail naturally.
+2. **Debugging**: Full error messages and stack traces are essential
+3. **Data Integrity**: Silent failures corrupt results
+4. **Reproducibility**: Hidden errors make workflows unreproducible
+
+## Code Style
+
+- Use snake_case for variable names
+- Comment complex operations
+- Keep code chunks focused on single tasks
+- Set random seeds: `set.seed(51773)`
+- Document all custom functions
+
+## File Organization
+
+- `MAIN/`: Primary workflow and analysis files
+  - `SpicyFlow.Rmd`: Main spatial analysis workflow
+  - `CONFIG/`: Configuration and standards documents
+  - `RES/`: Results output
+  - `PROG/`: Programs and scripts
+- `scripts/`: QuPath and analysis scripts
+- `data/`: Data files (ignored by renv)
+
+## Reproducibility
+
+- Use renv for R package management
+- Document all dependencies
+- Use absolute paths when possible
+- Create .renvignore to exclude data/output files
+
+## When Suggesting Code
+
+- Prioritize transparency over convenience
+- Show errors, don't hide them
+- Suggest fixes for root causes, not workarounds
+- Reference CODING_STANDARDS.md when relevant
+
+---
+
+**Full standards**: See `MAIN/CONFIG/CODING_STANDARDS.md`
+

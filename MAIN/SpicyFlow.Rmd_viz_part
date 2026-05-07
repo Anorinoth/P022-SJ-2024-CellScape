@@ -1,0 +1,113 @@
+
+## 7.8 Additional Visualizations
+
+In this section, we generate detailed visualizations to further explore the spatial domain results.
+
+### 7.8.1 Marker Expression Heatmap by Cell Type and Image
+
+We visualize the mean marker expression for each cell type, faceted by image, to ensure consistency in cell type definitions across samples.
+
+``` {r detailed_visualizations, fig.width=16, fig.height=12}
+message("Generating detailed visualizations...")
+
+# 1. Heatmap of Marker Expression by Cell Type (Faceted by Image)
+if (exists("clustering_markers")) {
+    message("  Generating marker expression heatmaps per image...")
+
+    # Calculate mean marker expression per cell type per image
+    heatmap_data <- colData(combined_spe) %>%
+        as.data.frame() %>%
+        group_by(imageID, cellType) %>%
+        summarise(across(all_of(clustering_markers), mean), .groups = "drop") %>%
+        tidyr::pivot_longer(
+            cols = all_of(clustering_markers),
+            names_to = "marker",
+            values_to = "expression"
+        )
+
+    # Create Heatmap
+    p_heatmap <- ggplot(heatmap_data, aes(x = marker, y = cellType, fill = expression)) +
+        geom_tile() +
+        facet_wrap(~imageID, ncol = 1) +
+        scale_fill_gradient2(
+            low = "blue", mid = "white", high = "red",
+            midpoint = 0.5 # Assuming Z-score or similar range, but data is 'norm'.
+            # Normalized data often centered around 0 if scaled, but here likely arcsinh.
+            # Let's use mean of data as midpoint to be safe.
+        ) +
+        theme_classic() +
+        theme(
+            axis.text.x = element_text(angle = 45, hjust = 1, size = 8),
+            axis.text.y = element_text(size = 8),
+            strip.text = element_text(face = "bold", size = 12),
+            panel.border = element_rect(colour = "black", fill = NA, size = 0.5)
+        ) +
+        labs(
+            title = "Marker Expression by Cell Type (Faceted by Image)",
+            subtitle = "Mean normalized expression",
+            x = "Marker",
+            y = "Cell Type",
+            fill = "Expression"
+        )
+
+    # Adjust midpoint dynamically
+    p_heatmap <- p_heatmap + scale_fill_gradient2(
+        low = "blue", mid = "white", high = "red",
+        midpoint = mean(heatmap_data$expression, na.rm = TRUE)
+    )
+
+    print(p_heatmap)
+
+    # Save
+    heatmap_file <- file.path(domains_dir, "marker_expression_heatmap_by_image.png")
+    ggsave(heatmap_file, p_heatmap, width = 16, height = 12, bg = "white")
+    message("  ✓ Marker heatmap saved to: ", basename(heatmap_file))
+}
+
+# 2. Updated Spatial Domain Composition (Stacked Bar Plot with Consistent Colors)
+message("\n  Generating updated spatial domain composition plot...")
+
+# Ensure we have the annotated composition data
+# If domain_composition_annotated exists (from Section 7.6), use it.
+# Otherwise, we might need to reconstruct it, but typically 7.6 runs before this.
+
+if (exists("domain_composition_annotated") && exists("celltype_colors")) {
+    # Check if all cell types have colors
+    missing_colors <- setdiff(unique(domain_composition_annotated$cellType), names(celltype_colors))
+    if (length(missing_colors) > 0) {
+        message("    ⚠️  Warning: Some cell types missing colors: ", paste(missing_colors, collapse = ", "))
+        # Extend palette if needed (simple fallback)
+        # But ideally we use what we have
+    }
+
+    comp_plot_colored <- ggplot(
+        domain_composition_annotated,
+        aes(x = domain_label, y = proportion, fill = cellType)
+    ) +
+        geom_bar(stat = "identity", position = "stack") +
+        facet_wrap(~imageID, ncol = 1) +
+        scale_y_continuous(labels = scales::percent) +
+        scale_fill_manual(values = celltype_colors) + # Use the consistent colors
+        labs(
+            title = "Spatial Domain Composition by Image (Consistent Colors)",
+            subtitle = "Stacked bars show cell type proportions within each domain",
+            x = "Spatial Domain",
+            y = "Proportion of Cells",
+            fill = "Cell Type"
+        ) +
+        theme_classic() +
+        theme(
+            axis.text.x = element_text(angle = 45, hjust = 1, size = 9),
+            legend.position = "right",
+            plot.title = element_text(size = 14, face = "bold")
+        )
+
+    print(comp_plot_colored)
+
+    comp_file <- file.path(domains_dir, "spatial_domains_composition_comparison_colored.png")
+    ggsave(comp_file, comp_plot_colored, width = 16, height = 10, bg = "white")
+    message("  ✓ Updated composition plot saved to: ", basename(comp_file))
+} else {
+    message("  ⚠️  Skipping composition plot: 'domain_composition_annotated' or 'celltype_colors' missing.")
+}
+```

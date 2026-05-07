@@ -1,0 +1,69 @@
+# ============================================================================
+
+# R Environment Configuration for SJ_04.2 Project
+
+# ============================================================================
+
+# --- Temporary Directory (B Drive) ---
+
+TMPDIR=/mnt/b/Projects/Image_Analysis_Projects/SJ_04.2/MAIN/temp
+TEMP=/mnt/b/Projects/Image_Analysis_Projects/SJ_04.2/MAIN/temp
+TMP=/mnt/b/Projects/Image_Analysis_Projects/SJ_04.2/MAIN/temp
+
+# --- renv Cache Location (B Drive to save C drive space) ---
+
+# renv cache can grow very large (several GB)
+
+RENV_PATHS_CACHE=/mnt/b/Projects/Image_Analysis_Projects/SJ_04.2/renv/cache
+RENV_PATHS_LIBRARY_ROOT=/mnt/b/Projects/Image_Analysis_Projects/SJ_04.2/renv/library
+
+# --- HDF5 Settings (for cytomapper h5 files) ---
+
+# Disable file locking - can cause issues on WSL2 and network drives
+
+HDF5_USE_FILE_LOCKING=FALSE
+
+# --- R Memory Settings ---
+
+# Set maximum vector size (increase if working with very large images)
+
+# Default is ~16GB on 64-bit systems; adjust based on your RAM
+
+# R memory limits for large image analysis (added for SJ_04.2 project)
+
+R_MAX_VSIZE=800Gb # Maximum vector memory size (matches your RAM limit)
+R_MAX_NUM_DLLS=500 # Max number of DLLs (for packages with many dependencies)
+
+# --- Parallel Processing ---
+
+# Set default number of threads for parallel operations
+
+# You can override this in code, but good to have a default
+
+MC_CORES=18
+
+# --- BiocParallel Settings ---
+
+# Reduce verbosity of BiocParallel messages
+
+BIOCPARALLEL_VERBOSE=0
+
+# --- Package Repository (optional but recommended) ---
+
+# Set CRAN mirror to avoid repeated selection prompts
+
+R_CRAN_MIRROR=https://cloud.r-project.org
+
+# --- Java Configuration (for RBioFormats) ---
+
+# Java home directory
+
+JAVA_HOME=/usr/lib/jvm/default-java
+
+# Add Java to library path for rJava/RBioFormats
+
+LD_LIBRARY_PATH=${JAVA_HOME}/lib/server:${LD_LIBRARY_PATH}
+
+# R Java configuration
+
+R_JAVA_LD_LIBRARY_PATH=${JAVA_HOME}/lib/server

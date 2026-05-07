@@ -1,0 +1,22 @@
+# Bioconductor packages required for SJ_04.2 project
+# One package per line, blank lines and lines starting with # are ignored
+
+SingleCellExperiment
+SpatialExperiment
+tidySingleCellExperiment
+SpatialDatasets
+cytomapper
+EBImage
+simpleSeg
+scater
+FuseSOM
+STexampleData
+scuttle
+spicyR
+Statial
+imcRtools
+treekoR
+lisaClust
+scFeatures
+ClassifyR
+

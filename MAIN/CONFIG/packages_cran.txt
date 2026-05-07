@@ -1,0 +1,15 @@
+# CRAN packages required for SJ_04.2 project
+# One package per line, blank lines and lines starting with # are ignored
+
+dplyr
+ggplot2
+MLmetrics
+survival
+tibble
+ggsurvfit
+ggpubr
+remotes
+futile.options
+lambda.r
+qs
+bigmemory
